@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+import 'PurchaseScreen.dart';
 
 void main() {
   // 스플래시 위젯 적용
@@ -30,6 +33,34 @@ class InformationDetail extends StatefulWidget {
 
 class _InformationDetailState extends State<InformationDetail> {
   bool _isExpanded = false; // _isExpanded 상태 변수 추가
+  void _onPurchaseButtonPressed(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 200,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  '모달 창',
+                  style: TextStyle(fontSize: 24),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // 모달 닫기
+                  },
+                  child: Text('닫기'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+  //  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ↑구매버튼 누르면 창뜨는 메서드 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +82,9 @@ class _InformationDetailState extends State<InformationDetail> {
                 fit: BoxFit.cover,
               ),
             ),
-            Divider(
-              color: Colors.grey,
-              thickness: 0.2,
+            const Divider(
+              color: Color(0xffF0EADB),
+              thickness: 2,
             ),
             Padding(
               padding:
@@ -61,7 +92,7 @@ class _InformationDetailState extends State<InformationDetail> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 22.9),
+                  const SizedBox(height: 22.9),
                   RichText(
                     text: TextSpan(
                       children: [
@@ -81,32 +112,32 @@ class _InformationDetailState extends State<InformationDetail> {
                           style: TextStyle(fontSize: 18, color: Colors.black),
                         ),
                         TextSpan(
-                          text: '  강추!',
+                          text: ' 강추!',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: 22,
                               color: Colors.red),
                         ),
                       ],
                     ),
                   ),
                   Padding(padding: EdgeInsets.all(5.20)),
-                  Divider(
-                    color: Colors.grey,
-                    thickness: 0.5,
+                  const Divider(
+                    color: Color(0xffF0EADB),
+                    thickness: 2,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: Container(
-                          color: Colors.yellow[600],
-                          padding: EdgeInsets.symmetric(
-                              vertical: 5.0, horizontal: 30.0),
-                          child: RichText(
-                            text: TextSpan(
-                              text: 'Hit',
+                      Flexible(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: Container(
+                            color: Colors.yellow[600],
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5.0, horizontal: 20.0),
+                            child: Text(
+                              'Hot',
                               style: TextStyle(
                                   color: Colors.red,
                                   fontWeight: FontWeight.bold),
@@ -114,32 +145,55 @@ class _InformationDetailState extends State<InformationDetail> {
                           ),
                         ),
                       ),
-                      Text(
-                        '29,000원',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                      Flexible(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            color: Colors.red,
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5.0, horizontal: 5.0),
+                            child: Text(
+                              '한정수량',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
+                      Column(
+                        children: [
+                          Text(
+                            '           29,000원',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 40),
+                          Text(
+                            '2,500원 (50,000원 이상 무료배송)',
+                            style: TextStyle(fontSize: 15, color: Colors.black),
+                          ),
+                        ],
+                      )
                     ],
                   ),
-                  Divider(
-                    color: Colors.grey,
-                    thickness: 0.5,
+                  Padding(padding: EdgeInsets.all(5.20)),
+                  const Divider(
+                    color: Color(0xffF0EADB),
+                    thickness: 2,
                   ),
-                  Text(
-                    '일반택배 >',
-                    style: TextStyle(fontSize: 15, color: Colors.black),
-                  ),
-                  SizedBox(height: 16),
                   Row(
                     children: [
                       Text(
                         '식물 키우는 꿀팁',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Color(0xFF3A4D39)),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Color(0xFF3A4D39),
+                        ),
                       ),
                       TextButton(
                         onPressed: () {
@@ -154,6 +208,8 @@ class _InformationDetailState extends State<InformationDetail> {
                       ),
                     ],
                   ),
+
+                  //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 클릭시 내용 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
                   SizedBox(height: 16),
                   if (_isExpanded) ...[
                     Text(
@@ -190,39 +246,7 @@ class _InformationDetailState extends State<InformationDetail> {
                   ], // 접기/펼쳐보기.
                   SizedBox(height: 16),
                   Text('추가 텍스트'),
-
-                  Card(
-                    elevation: 4,
-                    child: ExpansionTile(
-                      title: Text(
-                        '식물이름',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      children: [
-                        ListTile(
-                          title: Text('목록'),
-                          onTap: () {},
-                        )
-                      ],
-                    ),
-                  ),
                   Padding(padding: EdgeInsets.all(1.5)),
-
-                  Card(
-                    elevation: 4,
-                    child: ExpansionTile(
-                      title: Text(
-                        '식물이름',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -231,6 +255,9 @@ class _InformationDetailState extends State<InformationDetail> {
           ],
         ),
       ),
+      //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ↑ 본문 내용 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+      //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ클릭시 On New창 뜨는 부분! ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -254,7 +281,53 @@ class _InformationDetailState extends State<InformationDetail> {
               ),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Container(
+                      height: 200,
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Expanded(
+                              child: Card(
+                                elevation: 4,
+                                child: ExpansionTile(
+                                  title: Text(
+                                    '식물이름',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  children: [
+                                    ListTile(
+                                      title: Text('목록'),
+                                      onTap: () {},
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Text(
+                              '구매창',
+                              style: TextStyle(fontSize: 24),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(); // 모달 닫기
+                              },
+                              child: Text('닫기'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
               child: Text(
                 '바로 구매',
                 style: TextStyle(
